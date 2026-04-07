@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const errorHandler = require('./middlewares/errorHandler');
 require('dotenv').config();
 
 const app = express();
@@ -16,6 +17,8 @@ app.get('/api/health', (req, res) =>
 });
 
 app.use('/api/users', require('./routes/userRoutes'));
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en  http://localhost:${PORT}.`);

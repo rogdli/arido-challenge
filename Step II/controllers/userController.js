@@ -1,30 +1,25 @@
 const userService = require('../services/userService');
 
 const userController = {
-    getAllUsers: async (req, res) => {
+    getAllUsers: async (req, res, next) => {
         try {
             const users = await userService.getAllUsers();
             res.status(200).json(users);
         } catch (error) {
-            console.error('Error al obtener usuarios:', error);
-            res.status(500).json({ error: 'Error interno del servidor (500).' });
+            next(error);
         }
     },
 
-    getUserByAlias: async (req, res) => {
+    getUserByAlias: async (req, res, next) => {
         try {
             const user = await userService.getUserByAlias(req.params.alias);
             res.status(200).json(user);
         } catch (error) {
-            // Si el error trae un status (ej. el 404 del servicio), lo usamos. Si no, es un 500.
-            if (error.status) return res.status(error.status).json({ error: error.message });
-            
-            console.error('Error al obtener usuario:', error);
-            res.status(500).json({ error: 'Error interno del servidor (500).' });
+            next(error);
         }
     },
 
-    registerUser: async (req, res) => {
+    registerUser: async (req, res, next) => {
         try {
             const { username_alias, password } = req.body;
             const newUser = await userService.registerUser(username_alias, password);
@@ -34,20 +29,16 @@ const userController = {
                 user: newUser
             });
         } catch (error) {
-            if (error.status) return res.status(error.status).json({ error: error.message });
-            
-            console.error('Error al registrar usuario:', error);
-            res.status(500).json({ error: 'Error interno del servidor (500).' });
+            next(error);
         }
     },
 
-    getUserGroups: async (req, res) => {
+    getUserGroups: async (req, res, next) => {
         try {
             const groups = await userService.getUserGroups(req.params.alias);
             res.status(200).json(groups);
         } catch (error) {
-            console.error('Error al obtener los grupos del usuario:', error);
-            res.status(500).json({ error: 'Error interno del servidor (500).' });
+            next(error);
         }
     }
 };
