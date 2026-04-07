@@ -26,3 +26,6 @@ CREATE TABLE User_Security (
     FOREIGN KEY (group_id) REFERENCES Security_Groups(group_id) ON DELETE CASCADE,
     FOREIGN KEY (level_id) REFERENCES Access_Level(level_id) ON DELETE RESTRICT
 );
+
+-- índice B-Tree para acelerar las búsquedas por alias en el hipotético caso de que hubiera muchísimas filas
+CREATE INDEX idx_username_alias ON Users_Base(username_alias);
