@@ -6,8 +6,6 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// middlewares globales, no veo necesario crearles una carpeta aparte por ahora
-
 app.use(cors());
 app.use(express.json());
 

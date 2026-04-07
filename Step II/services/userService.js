@@ -9,7 +9,6 @@ const userService = {
     getUserByAlias: async (alias) => {
         const user = await userRepository.getByAlias(alias);
         if (!user) {
-            // Lanzamos un error controlado para que el controlador lo atrape
             throw { status: 404, message: 'Usuario no encontrado (404).' };
         }
         return user;
