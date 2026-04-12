@@ -15,7 +15,7 @@
 3. Ejecutar los scripts SQL adjuntos en la carpeta 'Step I' en el orden:
    * `01_create_schema.sql` (Estructura, tablas y relaciones).
    * `02_access_levels.sql` (Niveles de acceso y grupos de seguridad base).
-   * `03_mock_data.sql` (Carga de usuarios e información de prueba).
+   * `03_insert_data.sql` (Carga de usuarios e información).
    * `04_queries.sql` (Opcional: para validar las consultas de prueba).
   
 ### Step II: Backend
